@@ -57,7 +57,7 @@ See samples.html & source below. Feel free to extend the marks.
                 rowHeight: 20,
                 rows: 2,
                 labelVAlign: "bottom",
-                labelHAlign: "right",
+                labelHAlign: "right"
             }
         }
     };
