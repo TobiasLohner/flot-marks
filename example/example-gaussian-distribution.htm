@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Marks - Gaussian distribution example</title>
+    <link href="css/samples.css" rel="stylesheet" type="text/css">
+    <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.flot.marks.js"></script>
+</head><body><div id="page-content" style="text-align:left;width:960px;height:100%;margin-left:auto;margin-right:auto;padding-left:2em;padding-right:2em;border-left:solid 1px silver;border-right:solid 1px silver;">
+    <h1>Marks - MIL-STD-1553 CW example</h1>
+
+    <p>
+        Gaussian distribution also known as normal distribution characterized by <strong>sigma</strong>
+        (standard deviation) and <strong>mu</strong> (central moment or mean value).
+    </p>
+    <p>Here goes the graph for GD with sigma=1.0 and mu=0.0:</p>
+
+    <div id="placeholder" style="width:600px;height:300px;position:relative;"></div>
+
+    <div class="cr_footer">Released under GPLv2, (C) 2012 Serge V. Izmaylov</div>
+</div>
+<script type="text/javascript">
+$(function () {
+    var dd = [];
+    var sigma = 1.0;
+    var mu = 0.0;
+    function density(x) {
+        return 1 / (sigma*Math.sqrt(2*Math.PI)) * Math.exp(-(x-mu)*(x-mu)/(2*sigma*sigma));
+    }
+    for (var i = -4.0; i <= 4.0; i += 0.125)
+        dd.push([i, density(i)]);
+    var d1 = {
+                label: "Gaussian",
+                data: dd
+    };
+    var d2 = {marks: { show: true }, data: [], markdata: [
+        {label: '3&sigma;', position: -3.0, row: 0},
+        {label: '2&sigma;', position: -2.0, row: 0},
+        {label: '&sigma;', position: -1.0, row: 0},
+        {label: '&sigma;', position: 1.0, row: 0},
+        {label: '2&sigma;', position: 2.0, row: 0},
+        {label: '3&sigma;', position: 3.0, row: 0}
+    ]};
+
+    $.plot($("#placeholder"), [ d1, d2 ], {
+        xaxis: { min: -4*sigma, max: 4*sigma }
+    });
+});
+</script></body></html>
