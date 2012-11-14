@@ -36,6 +36,8 @@ series {
         labelHAlign: -- (optional) change vertical label alignment for that mark only
         labelVAlign: -- (optional) change horizontal label alignment for that mark only
         row: -- (optional) force label of that mark to lay in given row
+        color: -- mark outline color
+        fillColor: -- color for filling interior of triangle mark
     }, ... ]
 }
 
@@ -94,7 +96,10 @@ See samples.html & source below. Feel free to extend the marks.
         }
     };
 
-    function drawSingleMark(ctx, x, ytop, ybot, w2, h2, series) {
+    function drawSingleMark(ctx, x, ytop, ybot, w2, h2, series, markdata) {
+
+        markdata.color && (ctx.strokeStyle = markdata.color);
+        markdata.fillColor && (ctx.fillStyle = markdata.fillColor);
 
         ctx.beginPath();
 
@@ -156,7 +161,7 @@ See samples.html & source below. Feel free to extend the marks.
         for (var i = 0; i < series.markdata.length; i++)
             if ((series.markdata[i].position >= axes.xaxis.min) && (series.markdata[i].position <= axes.xaxis.max)) {
               var x = axes.xaxis.p2c(series.markdata[i].position);
-              drawSingleMark(ctx, x, ytop, ybot, w2, h2, series);
+              drawSingleMark(ctx, x, ytop, ybot, w2, h2, series, series.markdata[i]);
             }
 
         ctx.restore();
