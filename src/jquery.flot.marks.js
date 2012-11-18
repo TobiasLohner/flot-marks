@@ -71,7 +71,7 @@ See samples.html & source below. Feel free to extend the marks.
         // Fool Flot with fake datapoints
         datapoints.format = [ // Fake format
             { x: true, number: true, required: true },
-            { y: true, number: true, required: true },
+            { y: true, number: true, required: true }
         ];
         datapoints.points = []; // Empty data
         datapoints.pointsize = 2; // Fake size
